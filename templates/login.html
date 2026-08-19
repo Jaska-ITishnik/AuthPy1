@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kirish — AuthLab</title>
+    <link rel="stylesheet" href="../apps/static/apps/css/auth.css">
+</head>
+<body>
+<main class="shell">
+    <section class="visual"><a class="brand" href="login.html"><span class="mark">A</span>AuthLab</a>
+        <div class="visual-copy"><span class="eyebrow">● Authentication amaliyoti</span>
+            <h1>Xavfsiz kirish shu yerdan boshlanadi.</h1>
+            <p>Login, sessiya, redirect va xabarlar tizimini real interfeys orqali o‘rganing.</p>
+            <div class="lesson-list">
+                <span>Foydalanuvchi</span><span>Login</span><span>Sessiya</span><span>Redirect</span></div>
+        </div>
+        <small>Static frontend o‘quv shabloni</small></section>
+    <section class="auth-side">
+        <div class="auth-wrap">
+            <a class="brand mobile-brand" href="login.html"><span class="mark">A</span>AuthLab</a>
+            <div class="topline">Hisobingiz yo‘qmi?&nbsp; <a href="register.html">Ro‘yxatdan o‘ting</a></div>
+            <h2>Xush kelibsiz 👋</h2>
+            <p class="lead">Davom etish uchun emailingiz va parolingizni kiriting.</p>
+            <div class="messages" data-message-area hidden></div>
+            <form data-demo-form data-success="dashboard.html">
+                <div class="field"><label for="email">Email manzil</label>
+                    <div class="control"><input id="email" name="email" type="email" autocomplete="email"
+                                                placeholder="student@example.com" required></div>
+                </div>
+                <div class="field">
+                    <div class="label-row"><label for="password">Parol</label><a href="password_reset.html">Parolni
+                        unutdingizmi?</a></div>
+                    <div class="control"><input id="password" name="password" type="password"
+                                                autocomplete="current-password" placeholder="••••••••" required>
+                        <button class="toggle-pass" type="button" data-toggle-password="password">Ko‘rish</button>
+                    </div>
+                </div>
+                <label class="check"><input name="remember_me" type="checkbox"> Ushbu qurilmada meni eslab qol</label>
+                <button class="btn btn-primary" type="submit">Tizimga kirish →</button>
+            </form>
+            <div class="divider">yoki</div>
+            <button class="btn btn-ghost" type="button" data-demo-message="Google orqali kirish faqat UI namunasidir.">G
+                Google bilan davom etish (UI)
+            </button>
+        </div>
+    </section>
+</main>
+<script src="../apps/static/apps/js/auth.js"></script>
+</body>
+</html>

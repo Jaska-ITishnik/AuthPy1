@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ro‘yxatdan o‘tish — AuthLab</title>
+    <link rel="stylesheet" href="../apps/static/apps/css/auth.css">
+</head>
+<body>
+<main class="shell">
+    <section class="visual"><a class="brand" href="login.html"><span class="mark">A</span>AuthLab</a>
+        <div class="visual-copy"><span class="eyebrow">Yangi hisob</span>
+            <h1>Bir formadan to‘liq auth oqimigacha.</h1>
+            <p>Validatsiya, unique email, kuchli parol va email tasdiqlash bosqichlarini ketma-ket o‘rganing.</p>
+            <div class="lesson-list"><span>User creation</span><span>Validation</span><span>Hashing</span><span>Email verification</span>
+            </div>
+        </div>
+        <small>Parol hech qachon ochiq saqlanmaydi</small></section>
+    <section class="auth-side">
+        <div class="auth-wrap">
+            <a class="brand mobile-brand" href="login.html"><span class="mark">A</span>AuthLab</a>
+            <div class="topline">Hisobingiz bormi?&nbsp; <a href="login.html">Kirish</a></div>
+            <h2>Hisob yarating</h2>
+            <p class="lead">Ma’lumotlarni kiriting. Barcha maydonlar majburiy.</p>
+            <div class="messages" data-message-area hidden></div>
+            <form data-register-form>
+                <div class="two">
+                    <div class="field"><label for="first_name">Ism</label>
+                        <div class="control"><input id="first_name" name="first_name" required></div>
+                    </div>
+                    <div class="field"><label for="last_name">Familiya</label>
+                        <div class="control"><input id="last_name" name="last_name" required></div>
+                    </div>
+                </div>
+                <div class="field"><label for="email">Email</label>
+                    <div class="control"><input id="email" name="email" type="email" placeholder="student@example.com"
+                                                required></div>
+                </div>
+                <div class="field"><label for="password1">Parol</label>
+                    <div class="control"><input id="password1" name="password1" type="password" data-password required>
+                        <button class="toggle-pass" type="button" data-toggle-password="password1">Ko‘rish</button>
+                    </div>
+                    <div class="strength"><span></span></div>
+                </div>
+                <div class="requirements"><span data-rule="length"
+                                                data-label="Kamida 8 belgi">○ Kamida 8 belgi</span><span
+                        data-rule="upper" data-label="Katta harf">○ Katta harf</span>
+                    <span data-rule="number" data-label="Raqam">○ Raqam</span><span data-rule="symbol"
+                                                                                    data-label="Maxsus belgi">○ Maxsus belgi</span>
+                </div>
+                <div class="field"><label for="password2">Parolni tasdiqlang</label>
+                    <div class="control"><input id="password2" name="password2" type="password" required>
+                        <button class="toggle-pass" type="button" data-toggle-password="password2">Ko‘rish</button>
+                    </div>
+                    <p class="error" data-password-error hidden>Parollar bir xil bo‘lishi kerak.</p></div>
+                <label class="check"><input name="terms" type="checkbox" required> Foydalanish shartlari va maxfiylik
+                    siyosatiga roziman</label>
+                <button class="btn btn-primary" type="submit">Hisob yaratish →</button>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="../apps/static/apps/js/auth.js"></script>
+</body>
+</html>
