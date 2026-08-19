@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Havola yaroqsiz — AuthLab{% endblock %}
+
+{% block content %}
+<main class="auth-side error-page">
+    <section class="auth-wrap error-content">
+        <a class="brand error-brand" href="{% url 'login' %}"><span class="mark">A</span>AuthLab</a>
+        <div class="icon error-icon">!</div>
+        <p class="eyebrow error-code">Havola yaroqsiz</p>
+        <h2>Tasdiqlash havolasi ishlamadi</h2>
+        <p class="lead">Havolaning muddati tugagan yoki u avval ishlatilgan. Yangi havola olish uchun ro‘yxatdan o‘tish jarayonini tekshiring.</p>
+        <a class="btn btn-primary" href="{% url 'verify_email' %}">Yangi havola yuborish</a>
+        <div class="divider">yoki</div>
+        <a href="{% url 'login' %}">Kirish sahifasiga qaytish</a>
+    </section>
+</main>
+{% endblock %}

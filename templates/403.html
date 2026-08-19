@@ -1,20 +1,18 @@
-<!doctype html>
-<html lang="uz">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Ruxsat yo‘q — AuthLab</title>
-    <link rel="stylesheet" href="../apps/static/apps/css/auth.css">
-</head>
-<body>
-<main class="auth-side" style="min-height:100vh">
-    <section class="auth-wrap" style="text-align:center">
-        <div class="icon" style="margin:auto">🔒</div>
-        <p class="eyebrow" style="color:var(--primary);margin-top:24px">403 · Forbidden</p>
+{% extends "base.html" %}
+
+{% block title %}Ruxsat yo‘q — AuthLab{% endblock %}
+
+{% block content %}
+<main class="auth-side error-page">
+    <section class="auth-wrap error-content">
+        <a class="brand error-brand" href="{% url 'dashboard' %}"><span class="mark">A</span>AuthLab</a>
+        <div class="icon error-icon">🔒</div>
+        <p class="eyebrow error-code">403 · Forbidden</p>
         <h2>Bu sahifa uchun ruxsatingiz yetarli emas</h2>
-        <p class="lead">Bu backend ulanmagan static 403 sahifa namunasidir.</p>
-        <a class="btn btn-primary" href="dashboard.html">Dashboardga qaytish</a><br><a href="login.html">Boshqa hisob
-        bilan kirish</a></section>
+        <p class="lead">Bu backend permission tekshiruviga ulash uchun tayyorlangan 403 sahifasidir.</p>
+        <a class="btn btn-primary" href="{% url 'dashboard' %}">Dashboardga qaytish</a>
+        <div class="divider">yoki</div>
+        <a href="{% url 'login' %}">Boshqa hisob bilan kirish</a>
+    </section>
 </main>
-</body>
-</html>
+{% endblock %}

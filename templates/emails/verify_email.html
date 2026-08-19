@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AuthLab hisobini tasdiqlash</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,sans-serif;color:#172033">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f5f7fb;padding:36px 16px">
+    <tr>
+        <td align="center">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:600px;background:#ffffff;border-radius:22px;overflow:hidden;box-shadow:0 16px 45px rgba(26,32,44,.10)">
+                <tr>
+                    <td style="padding:32px 36px;background:linear-gradient(135deg,#1e1b4b,#6d28d9);color:#ffffff">
+                        <div style="font-size:21px;font-weight:800">A&nbsp;&nbsp;AuthLab</div>
+                        <h1 style="margin:38px 0 10px;font-size:32px;line-height:1.15">Emailingizni tasdiqlang</h1>
+                        <p style="margin:0;color:#ddd6fe;line-height:1.6">Xavfsiz hisob yaratishga bir qadam qoldi.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:36px">
+                        <p style="margin:0 0 16px;font-size:18px;font-weight:700">Salom, {{ user.first_name|default:"foydalanuvchi" }}!</p>
+                        <p style="margin:0 0 26px;color:#667085;line-height:1.7">AuthLab hisobingizni faollashtirish uchun quyidagi tugmani bosing. Havola {{ timeout_minutes }} daqiqa amal qiladi va faqat bir marta ishlatiladi.</p>
+                        <table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 auto 28px">
+                            <tr>
+                                <td style="border-radius:13px;background:#5b5bd6">
+                                    <a href="{{ verification_url }}" style="display:inline-block;padding:15px 28px;color:#ffffff;text-decoration:none;font-weight:700">Emailni tasdiqlash →</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="margin:0;color:#98a2b3;font-size:13px;line-height:1.6">Tugma ishlamasa, ushbu manzilni brauzerga ko‘chiring:</p>
+                        <p style="margin:8px 0 26px;word-break:break-all;font-size:13px;line-height:1.6"><a href="{{ verification_url }}" style="color:#5b5bd6">{{ verification_url }}</a></p>
+                        <div style="padding:16px;border-radius:12px;background:#f5f7fb;color:#667085;font-size:13px;line-height:1.6">Agar bu hisobni siz yaratmagan bo‘lsangiz, xabarni e’tiborsiz qoldiring.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="padding:22px 36px;border-top:1px solid #e4e7ec;color:#98a2b3;font-size:12px">© AuthLab · Authentication o‘quv loyihasi</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

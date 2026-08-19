@@ -1,6 +1,7 @@
 document.querySelectorAll('[data-toggle-password]').forEach(button => {
   button.addEventListener('click', () => {
     const input = document.getElementById(button.dataset.togglePassword);
+    if (!input) return;
     const visible = input.type === 'text';
     input.type = visible ? 'password' : 'text';
     button.textContent = visible ? 'Ko‘rish' : 'Yashirish';
@@ -43,21 +44,6 @@ document.querySelectorAll('[data-demo-form]').forEach(form => form.addEventListe
   event.preventDefault();
   window.location.href = form.dataset.success;
 }));
-
-const registerForm = document.querySelector('[data-register-form]');
-if (registerForm) registerForm.addEventListener('submit', event => {
-  event.preventDefault();
-  const first = document.getElementById('password1').value;
-  const second = document.getElementById('password2').value;
-  const error = document.querySelector('[data-password-error]');
-  if (first !== second) { error.hidden = false; return; }
-  error.hidden = true;
-  localStorage.setItem('auth-demo-email', document.getElementById('email').value);
-  window.location.href = 'verify_email.html';
-});
-
-const demoEmail = document.querySelector('[data-demo-email]');
-if (demoEmail) demoEmail.textContent = localStorage.getItem('auth-demo-email') || 'student@example.com';
 
 document.querySelectorAll('[data-message-form]').forEach(form => form.addEventListener('submit', event => {
   event.preventDefault();

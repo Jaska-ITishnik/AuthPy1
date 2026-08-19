@@ -1,0 +1,8 @@
+Salom, {{ user.first_name|default:"foydalanuvchi" }}!
+
+AuthLab hisobingizni faollashtirish uchun quyidagi havolani oching:
+{{ verification_url }}
+
+Havola {{ timeout_minutes }} daqiqa amal qiladi va faqat bir marta ishlatiladi.
+
+Agar bu hisobni siz yaratmagan bo‘lsangiz, xabarni e’tiborsiz qoldiring.

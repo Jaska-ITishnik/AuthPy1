@@ -1,0 +1,30 @@
+from django.urls import path
+
+from apps.views import (
+    ActivateEmailView,
+    DashboardView,
+    ForbiddenView,
+    LoginView,
+    PasswordResetView,
+    ProfileView,
+    RegisterView,
+    SessionsView,
+    VerifyEmailView,
+)
+
+
+urlpatterns = [
+    path("", LoginView.as_view(), name="login"),
+    path("register/", RegisterView.as_view(), name="register"),
+    path("password-reset/", PasswordResetView.as_view(), name="password_reset"),
+    path("verify-email/", VerifyEmailView.as_view(), name="verify_email"),
+    path(
+        "verify-email/<uidb64>/<token>/",
+        ActivateEmailView.as_view(),
+        name="activate_email",
+    ),
+    path("dashboard/", DashboardView.as_view(), name="dashboard"),
+    path("profile/", ProfileView.as_view(), name="profile"),
+    path("sessions/", SessionsView.as_view(), name="sessions"),
+    path("forbidden/", ForbiddenView.as_view(), name="forbidden"),
+]
