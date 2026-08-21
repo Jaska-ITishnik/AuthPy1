@@ -1,6 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth import login
 from django.db import transaction
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.encoding import force_str
@@ -9,13 +10,30 @@ from django.views import View
 from django.views.generic import FormView, TemplateView
 
 from apps.emails import send_verification_email
-from apps.forms import RegistrationForm
+from apps.forms import RegistrationForm, LoginForm
 from apps.models import User
 from apps.tokens import email_verification_token
 
 
-class LoginView(TemplateView):
+class UserLoginView(FormView):
     template_name = "login.html"
+    form_class = LoginForm
+
+    # def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    #     email = request.POST.get("email")
+    #     password = request.POST.get("password")
+    #     user = authenticate(request, email=email, password=password)
+    #     if not user:
+    #         raise ValidationError("Bunday foydalanuvchi mavjud emas!")
+    #     login(request, user, )
+
+    def form_valid(self, form):
+        user = form.get_user()
+        login(self.request, user)
+        return redirect('dashboard')
+
+    def form_invalid(self, form) -> HttpResponse:
+        return super().form_invalid(form)
 
 
 class RegisterView(FormView):
