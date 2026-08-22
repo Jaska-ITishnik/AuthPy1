@@ -77,11 +77,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 AUTH_USER_MODEL = "apps.User"
-LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "dashboard"
-LOGOUT_REDIRECT_URL = "login"
 LANGUAGE_CODE = 'en-us'
-
+LOGOUT_REDIRECT_URL = 'main-page'
+LOGIN_URL = '/login'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

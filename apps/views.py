@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -19,14 +20,6 @@ class UserLoginView(FormView):
     template_name = "login.html"
     form_class = LoginForm
 
-    # def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-    #     email = request.POST.get("email")
-    #     password = request.POST.get("password")
-    #     user = authenticate(request, email=email, password=password)
-    #     if not user:
-    #         raise ValidationError("Bunday foydalanuvchi mavjud emas!")
-    #     login(request, user, )
-
     def form_valid(self, form):
         user = form.get_user()
         login(self.request, user)
@@ -34,6 +27,11 @@ class UserLoginView(FormView):
 
     def form_invalid(self, form) -> HttpResponse:
         return super().form_invalid(form)
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('dashboard')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class RegisterView(FormView):
@@ -103,7 +101,7 @@ class ActivateEmailView(View):
             return None
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "dashboard.html"
 
 

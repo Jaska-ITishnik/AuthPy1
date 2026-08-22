@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from django.forms.models import ModelForm
+from django.forms.forms import Form
 
 from apps.models import User
 
@@ -34,18 +34,20 @@ class RegistrationForm(UserCreationForm):
         return user
 
 
-class LoginForm(ModelForm):
-    class Meta:
-        model = User
-        fields = "email", "password"
-        error_messages = {
-            "email": {
-                "required": "Email manzilni kiriting.",
-            },
-            "password": {
-                "required": "Parol majburiy kiriting.",
-            },
+class LoginForm(Form):
+    email = forms.EmailField(
+        error_messages={
+            "required": "Email manzilni kiriting.",
+            "invalid": "Email manzil noto‘g‘ri.",
         }
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput,
+        error_messages={
+            "required": "Parolni kiriting.",
+        }
+    )
 
     def clean_email(self):
         return self.cleaned_data["email"].strip().lower()
