@@ -10,7 +10,9 @@ load_dotenv(BASE_DIR / ".env")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://3084-87-192-234-226.ngrok-free.app"
+]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,6 +29,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'apps.middleware.SessionActivityMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -80,7 +83,7 @@ AUTH_USER_MODEL = "apps.User"
 LOGIN_REDIRECT_URL = "dashboard"
 LANGUAGE_CODE = 'en-us'
 LOGOUT_REDIRECT_URL = 'main-page'
-LOGIN_URL = '/login'
+LOGIN_URL = 'login'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

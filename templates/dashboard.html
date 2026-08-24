@@ -8,10 +8,10 @@
     <main class="container">
         <section class="welcome">
             <div>
-                <h1>Salom, Jasurbek!</h1>
+                <h1>Salom, {{ current_user.first_name|default:current_user_display_name }}!</h1>
                 <p>AuthLab frontend oqimining boshqaruv paneli.</p>
             </div>
-            <span class="badge">● Demo authenticated</span>
+            <span class="badge">● Authenticated</span>
         </section>
         <div class="grid">
             <article class="card">

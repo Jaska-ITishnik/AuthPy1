@@ -10,3 +10,4 @@ body.dark{--bg:#0d111c;--surface:#151b29;--surface2:#24233f;--text:#f2f4f7;--mut
 @media(max-width:620px){.main-nav{justify-content:flex-start;overflow-x:auto}.nav-actions .avatar,.nav-actions .danger-link{display:none}.theme{padding:8px}.section-title{align-items:flex-start;flex-direction:column;gap:12px}}
 
 .errorlist{margin:0;padding:0;list-style:none}.terms-error{margin-top:-14px;margin-bottom:18px}
+.danger-zone{border-color:#fecaca}.btn-danger{width:auto;display:inline-flex;color:#fff;background:var(--danger);box-shadow:0 10px 25px rgba(220,38,38,.18)}.btn-danger:hover{filter:brightness(1.05)}

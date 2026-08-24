@@ -50,7 +50,3 @@ document.querySelectorAll('[data-message-form]').forEach(form => form.addEventLi
   showMessage(form.dataset.messageForm);
 }));
 document.querySelectorAll('[data-demo-message]').forEach(button => button.addEventListener('click', () => showMessage(button.dataset.demoMessage, 'info')));
-
-document.querySelectorAll('[data-revoke]').forEach(button => button.addEventListener('click', () => button.closest('[data-other-session]').remove()));
-const removeOthers = document.querySelector('[data-remove-other-sessions]');
-if (removeOthers) removeOthers.addEventListener('click', () => document.querySelectorAll('[data-other-session]').forEach(row => row.remove()));

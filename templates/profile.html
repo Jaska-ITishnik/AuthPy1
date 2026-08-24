@@ -12,52 +12,103 @@
                 <a class="active" href="{% url 'profile' %}">Shaxsiy ma’lumotlar</a>
                 <a href="{% url 'sessions' %}">Faol sessiyalar</a>
                 <a href="#password">Parol va xavfsizlik</a>
+                <a href="#delete-account">Hisobni o‘chirish</a>
                 <a href="{% url 'dashboard' %}">← Dashboard</a>
             </aside>
             <div class="stack">
+                {% include "includes/messages.html" %}
                 <section class="card">
                     <h2>Shaxsiy ma’lumotlar</h2>
-                    <p class="muted">Static formani sinab ko‘ring.</p>
-                    <div class="messages" data-message-area hidden></div>
-                    <form data-message-form="Profil ma’lumotlari saqlandi (demo).">
+                    <p class="muted">Hisobingizdagi joriy ma’lumotlar.</p>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_profile">
                         <div class="two">
                             <div class="field">
                                 <label for="first_name">Ism</label>
-                                <div class="control"><input id="first_name" name="first_name" value="Jasurbek"></div>
+                                <div class="control">
+                                    <input id="first_name" name="first_name"
+                                           value="{{ profile_form.first_name.value|default_if_none:'' }}"
+                                           {% if profile_form.first_name.errors %}aria-invalid="true"{% endif %} required>
+                                </div>
+                                {% for error in profile_form.first_name.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
                             <div class="field">
                                 <label for="last_name">Familiya</label>
-                                <div class="control"><input id="last_name" name="last_name" value="Bekmirzayev"></div>
+                                <div class="control">
+                                    <input id="last_name" name="last_name"
+                                           value="{{ profile_form.last_name.value|default_if_none:'' }}"
+                                           {% if profile_form.last_name.errors %}aria-invalid="true"{% endif %} required>
+                                </div>
+                                {% for error in profile_form.last_name.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
                         </div>
                         <div class="field">
                             <label for="email">Email</label>
                             <div class="control">
-                                <input id="email" name="email" type="email" value="student@example.com">
+                                <input id="email" name="email" type="email"
+                                       value="{{ profile_form.email.value|default_if_none:'' }}"
+                                       {% if profile_form.email.errors %}aria-invalid="true"{% endif %} required>
                             </div>
-                            <p class="hint">Backend ulanganda email o‘zgarsa, qayta tasdiqlash talab qilinishi mumkin.</p>
+                            {% for error in profile_form.email.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            <p class="hint">Email o‘zgarsa, yangi manzilni tasdiqlash uchun sessiya yopiladi.</p>
                         </div>
                         <button class="btn btn-primary compact-btn" type="submit">Saqlash</button>
                     </form>
                 </section>
                 <section class="card" id="password">
                     <h2>Parolni almashtirish</h2>
-                    <form data-message-form="Parol yangilandi (demo).">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="change_password">
                         <div class="field">
                             <label for="old_password">Joriy parol</label>
-                            <div class="control"><input id="old_password" type="password" required></div>
+                            <div class="control">
+                                <input id="old_password" name="old_password" type="password"
+                                       autocomplete="current-password"
+                                       {% if password_form.old_password.errors %}aria-invalid="true"{% endif %} required>
+                            </div>
+                            {% for error in password_form.old_password.errors %}<p class="error">{{ error }}</p>{% endfor %}
                         </div>
                         <div class="two">
                             <div class="field">
                                 <label for="new_password1">Yangi parol</label>
-                                <div class="control"><input id="new_password1" type="password" required></div>
+                                <div class="control">
+                                    <input id="new_password1" name="new_password1" type="password"
+                                           autocomplete="new-password"
+                                           {% if password_form.new_password1.errors %}aria-invalid="true"{% endif %} required>
+                                </div>
+                                {% for error in password_form.new_password1.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
                             <div class="field">
                                 <label for="new_password2">Tasdiqlash</label>
-                                <div class="control"><input id="new_password2" type="password" required></div>
+                                <div class="control">
+                                    <input id="new_password2" name="new_password2" type="password"
+                                           autocomplete="new-password"
+                                           {% if password_form.new_password2.errors %}aria-invalid="true"{% endif %} required>
+                                </div>
+                                {% for error in password_form.new_password2.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
                         </div>
                         <button class="btn btn-primary compact-btn" type="submit">Parolni yangilash</button>
+                    </form>
+                </section>
+                <section class="card danger-zone" id="delete-account">
+                    <h2>Hisobni o‘chirish</h2>
+                    <p class="muted">Bu amalni ortga qaytarib bo‘lmaydi. Barcha hisob ma’lumotlari o‘chiriladi.</p>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="delete_account">
+                        <div class="field">
+                            <label for="delete_password">Tasdiqlash uchun joriy parol</label>
+                            <div class="control">
+                                <input id="delete_password" name="password" type="password"
+                                       autocomplete="current-password"
+                                       {% if delete_form.password.errors %}aria-invalid="true"{% endif %} required>
+                            </div>
+                            {% for error in delete_form.password.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                        </div>
+                        <button class="btn btn-danger compact-btn" type="submit">Hisobni butunlay o‘chirish</button>
                     </form>
                 </section>
             </div>

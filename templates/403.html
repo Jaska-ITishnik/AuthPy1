@@ -9,7 +9,7 @@
         <div class="icon error-icon">🔒</div>
         <p class="eyebrow error-code">403 · Forbidden</p>
         <h2>Bu sahifa uchun ruxsatingiz yetarli emas</h2>
-        <p class="lead">Bu backend permission tekshiruviga ulash uchun tayyorlangan 403 sahifasidir.</p>
+        <p class="lead">{{ current_user_display_name }}, bu sahifa uchun hisobingizda yetarli ruxsat yo‘q.</p>
         <a class="btn btn-primary" href="{% url 'dashboard' %}">Dashboardga qaytish</a>
         <div class="divider">yoki</div>
         <a href="{% url 'login' %}">Boshqa hisob bilan kirish</a>

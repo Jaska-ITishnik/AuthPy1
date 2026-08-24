@@ -1,14 +1,20 @@
 <header class="nav">
     <a class="brand" href="{% url 'dashboard' %}"><span class="mark">A</span>AuthLab</a>
     <nav class="main-nav" aria-label="Asosiy navigatsiya">
-        <a href="{% url 'dashboard' %}"{% if request.resolver_match.url_name == 'dashboard' %} class="active" aria-current="page"{% endif %}>Dashboard</a>
-        <a href="{% url 'profile' %}"{% if request.resolver_match.url_name == 'profile' %} class="active" aria-current="page"{% endif %}>Profil</a>
-        <a href="{% url 'sessions' %}"{% if request.resolver_match.url_name == 'sessions' %} class="active" aria-current="page"{% endif %}>Sessiyalar</a>
+        <a href="{% url 'dashboard' %}"{% if request.resolver_match.url_name == 'dashboard' %} class="active"
+           aria-current="page"{% endif %}>Dashboard</a>
+        <a href="{% url 'profile' %}"{% if request.resolver_match.url_name == 'profile' %} class="active"
+           aria-current="page"{% endif %}>Profil</a>
+        <a href="{% url 'sessions' %}"{% if request.resolver_match.url_name == 'sessions' %} class="active"
+           aria-current="page"{% endif %}>Sessiyalar</a>
     </nav>
     <div class="nav-actions">
         <button class="theme" data-theme type="button" aria-label="Rang mavzusini almashtirish">◐ Tema</button>
-        <div class="avatar" aria-hidden="true">J</div>
-        <span class="user-name">Jasurbek Bekmirzayev</span>
-        <a class="danger-link" href="{% url 'login' %}">Chiqish</a>
+        <div class="avatar" aria-hidden="true">{{ current_user_initials }}</div>
+        <span class="user-name">{{ current_user_display_name }}</span>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="danger-link">Chiqish</button>
+        </form>
     </div>
 </header>

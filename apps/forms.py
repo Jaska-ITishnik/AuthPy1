@@ -7,6 +7,42 @@ from django.forms.forms import Form
 from apps.models import User
 
 
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "email")
+        error_messages = {
+            "email": {
+                "required": "Email manzilni kiriting.",
+                "unique": "Bu email boshqa hisobga tegishli.",
+            },
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].strip().lower()
+        email_is_taken = User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists()
+        if email_is_taken:
+            raise ValidationError("Bu email boshqa hisobga tegishli.")
+        return email
+
+
+class DeleteAccountForm(forms.Form):
+    password = forms.CharField(
+        widget=forms.PasswordInput,
+        error_messages={"required": "Hisobni o‘chirish uchun joriy parolni kiriting."},
+    )
+
+    def __init__(self, *args, user, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+
+    def clean_password(self):
+        password = self.cleaned_data["password"]
+        if not self.user.check_password(password):
+            raise ValidationError("Joriy parol noto‘g‘ri.")
+        return password
+
+
 class RegistrationForm(UserCreationForm):
     terms = forms.BooleanField(
         required=True,

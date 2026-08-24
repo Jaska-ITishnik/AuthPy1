@@ -11,35 +11,44 @@
                 <h1>Faol sessiyalar</h1>
                 <p class="muted">Hisobingiz ochiq turgan qurilmalarni nazorat qiling.</p>
             </div>
-            <button class="danger-link" type="button" data-remove-other-sessions>Boshqa barcha sessiyalardan chiqish</button>
+            {% if other_session_count %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="revoke_other_sessions">
+                    <button class="danger-link" type="submit">Boshqa barcha sessiyalardan chiqish</button>
+                </form>
+            {% endif %}
         </div>
-        <div class="table" data-session-list>
-            <div class="row" data-current-session>
-                <div>
-                    <strong>Chrome · Ubuntu</strong>
-                    <div class="muted">Toshkent, O‘zbekiston</div>
+        {% include "includes/messages.html" %}
+        <div class="table">
+            {% for active_session in active_sessions %}
+                <div class="row">
+                    <div>
+                        <strong>{{ active_session.device }}</strong>
+                        <div class="muted">Muddati: {{ active_session.expires_at|date:"d.m.Y H:i" }}</div>
+                    </div>
+                    <div>{{ active_session.ip_address|default:"IP noma’lum" }}</div>
+                    {% if active_session.is_current %}
+                        <span class="status">Joriy sessiya</span><span></span>
+                    {% else %}
+                        <span class="muted">
+                            {% if active_session.last_activity %}
+                                Faollik: {{ active_session.last_activity|date:"d.m.Y H:i" }}
+                            {% else %}
+                                Faollik vaqti noma’lum
+                            {% endif %}
+                        </span>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="revoke_session">
+                            <input type="hidden" name="revoke_token" value="{{ active_session.revoke_token }}">
+                            <button class="danger-link" type="submit">Tugatish</button>
+                        </form>
+                    {% endif %}
                 </div>
-                <div>127.0.0.1</div>
-                <span class="status">Joriy sessiya</span><span></span>
-            </div>
-            <div class="row" data-other-session>
-                <div>
-                    <strong>Safari · iPhone</strong>
-                    <div class="muted">Toshkent, O‘zbekiston</div>
-                </div>
-                <div>192.168.1.24</div>
-                <span class="muted">2 soat oldin</span>
-                <button class="danger-link" type="button" data-revoke>Tugatish</button>
-            </div>
-            <div class="row" data-other-session>
-                <div>
-                    <strong>Chrome · Windows</strong>
-                    <div class="muted">Samarqand, O‘zbekiston</div>
-                </div>
-                <div>192.168.1.31</div>
-                <span class="muted">3 kun oldin</span>
-                <button class="danger-link" type="button" data-revoke>Tugatish</button>
-            </div>
+            {% empty %}
+                <div class="row"><span class="muted">Faol sessiyalar topilmadi.</span></div>
+            {% endfor %}
         </div>
     </main>
 </div>
